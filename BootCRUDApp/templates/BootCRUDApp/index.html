@@ -1,5 +1,33 @@
 {% extends 'BootCRUDApp/base.html' %}
 
+{% block header %}
+<h1>Garage Sell Listing</h1>
+{% endblock header %}
+
 {% block content %}
-<h1>In the Index Page</h1>
+
+<h3>Items for Sell</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ sellform.as_p }}
+    <button>Submit</button>
+</form>
+
+{% if allItems %}
+<div class="gridContainer">
+    {% for item in allItems %}
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{{ item.image }}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">{{ eachEntry.name }}</h5>
+            <p class="card-text"> <h4>{{ item.name }}</h4> {{ item.description }}</p>
+            <a href="{% url 'edit' item.id %}">Edit</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<h1>No Item</h1>
+{% endif %}
+
 {% endblock content %}

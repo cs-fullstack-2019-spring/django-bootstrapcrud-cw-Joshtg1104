@@ -1,0 +1,13 @@
+{% extends 'BootCRUDApp/base.html' %}
+
+{% block header %}
+<h1>Edit Item Listing</h1>
+{% endblock header %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ sellform.as_p }}
+    <button>Submit</button>
+</form>
+{% endblock content %}
